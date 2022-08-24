@@ -1,0 +1,22 @@
+{
+    "name": "itwmw/http-api",
+    "description": "用于Http Api调用",
+    "license": "Apache-2.0",
+    "type": "library",
+    "authors": [
+        {
+            "name": "虞灪",
+            "email": "995645888@qq.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Itwmw\\Http\\Api\\": "src"
+        }
+    },
+    "require": {
+        "php": ">=8.0",
+        "guzzlehttp/guzzle": "^7.0",
+        "guzzlehttp/guzzle-services": "^1.0"
+    }
+}
