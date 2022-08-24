@@ -341,14 +341,14 @@ class ParamDescription implements ToArrayInterface
     public function toArray(): array
     {
         $data = [
-            'type'        => $this->type,
-            'required'    => $this->required,
-            'default'     => $this->default,
-            'static'      => $this->static,
-            'description' => $this->description,
-            'location'    => $this->location,
-            'sentAs'      => $this->sentAs,
-            'filters'     => $this->filters,
+            'type'        => $this->type ?? null,
+            'required'    => $this->required ?? null,
+            'default'     => $this->default ?? null,
+            'static'      => $this->static ?? null,
+            'description' => $this->description ?? null,
+            'location'    => $this->location ?? null,
+            'sentAs'      => $this->sentAs ?? null,
+            'filters'     => $this->filters ?? null,
         ];
 
         if (!empty($this->items)) {
@@ -371,7 +371,7 @@ class ParamDescription implements ToArrayInterface
             $data = array_merge($data, $this->paramValidator->toArray());
         }
 
-        $paramsData = array_filter($data);
+        $paramsData = array_filter($data,fn($value) => !is_null($value));
 
         if (empty($this->name)) {
             return [$paramsData];

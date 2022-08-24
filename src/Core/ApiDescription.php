@@ -97,15 +97,15 @@ class ApiDescription implements ToArrayInterface
     public function toArray(): array
     {
         $apiData = [
-            'httpMethod'       => $this->httpMethod,
-            'uri'              => $this->uri,
-            'responseModel'    => $this->responseModel,
-            'notes'            => $this->notes,
-            'summary'          => $this->summary,
-            'documentationUrl' => $this->documentationUrl,
-            'deprecated'       => $this->deprecated,
-            'data'             => $this->data,
-            'errorResponses'   => $this->errorResponses
+            'httpMethod'       => $this->httpMethod ?? null,
+            'uri'              => $this->uri ?? null,
+            'responseModel'    => $this->responseModel ?? null,
+            'notes'            => $this->notes ?? null,
+            'summary'          => $this->summary ?? null,
+            'documentationUrl' => $this->documentationUrl ?? null,
+            'deprecated'       => $this->deprecated ?? null,
+            'data'             => $this->data ?? null,
+            'errorResponses'   => $this->errorResponses ?? null
         ];
 
         if (!empty($this->parameters)) {

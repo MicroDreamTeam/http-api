@@ -44,6 +44,6 @@ class ParamValidator
             'minimum'   => $this->minimum,
             'maximum'   => $this->maximum,
             'format'    => $this->format
-        ], fn ($item) => is_null($item));
+        ], fn ($item) => !is_null($item));
     }
 }
