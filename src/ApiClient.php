@@ -26,10 +26,13 @@ class ApiClient extends GuzzleClient
 
     protected BaseConfig $config;
 
-    public static function instance(BaseConfig $config): ApiClient
-    {
+    public static function instance(
+        BaseConfig $config,
+        callable $commandToRequestTransformer = null,
+        callable $responseToResultTransformer = null
+    ): ApiClient {
         if (!isset(self::$instance)) {
-            self::$instance = new static($config);
+            self::$instance = new static($config,$commandToRequestTransformer,$responseToResultTransformer);
         }
         return self::$instance;
     }
@@ -38,8 +41,7 @@ class ApiClient extends GuzzleClient
         BaseConfig $config,
         callable $commandToRequestTransformer = null,
         callable $responseToResultTransformer = null
-    )
-    {
+    ) {
         $this->config = $config;
 
         $this->httpClient = new HttpClient([
