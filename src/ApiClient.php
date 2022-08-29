@@ -34,7 +34,11 @@ class ApiClient extends GuzzleClient
         return self::$instance;
     }
 
-    public function __construct(BaseConfig $config)
+    public function __construct(
+        BaseConfig $config,
+        callable $commandToRequestTransformer = null,
+        callable $responseToResultTransformer = null
+    )
     {
         $this->config = $config;
 
@@ -50,11 +54,19 @@ class ApiClient extends GuzzleClient
             'operations'  => $this->getOperations()
         ]);
 
+        if (is_null($commandToRequestTransformer)) {
+            $commandToRequestTransformer = [$this, 'commandToRequestTransformer'];
+        }
+
+        if (is_null($responseToResultTransformer)) {
+            $responseToResultTransformer = [$this, 'responseToResultTransformer'];
+        }
+
         parent::__construct(
             $this->httpClient,
             $this->description,
-            [$this, 'commandToRequestTransformer'],
-            [$this, 'responseToResultTransformer']
+            $commandToRequestTransformer,
+            $responseToResultTransformer
         );
     }
 
